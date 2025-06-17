@@ -31,7 +31,7 @@ function switchTab(type) {
 }
 
 function startTest() {
-    const socket = new WebSocket('ws://' + window.location.hostname + ':3001');
+    const socket = new WebSocket('wss://' + window.location.host + '/ws');
     const result = document.getElementById('result');
     let startTime, endTime;
     socket.onopen = () => {
@@ -42,7 +42,7 @@ function startTest() {
         endTime = Date.now();
         const duration = (endTime - startTime) / 1000;
         const speed = (event.data.length / 1024 / duration).toFixed(2);
-        result.innerText = `下り速度: ${speed} KB/s, 応答時間: ${duration * 1000} ms`;
+        result.innerText = `下り速度: ${speed} KB/s, 応答時間: ${(duration * 1000).toFixed(0)} ms`;
         socket.close();
     };
 }
