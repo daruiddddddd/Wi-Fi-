@@ -6,13 +6,14 @@
   <title>埼玉県 ISPスピードテスト</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; text-align: center; }
+    body { font-family: sans-serif; margin: 0; padding: 0; text-align: center; }
     .header { background: #f0f0f0; padding: 1rem; position: sticky; top: 0; z-index: 999; }
-    .result { font-size: 1.5rem; margin: 1rem 0; }
-    canvas { max-width: 100%; }
-    button { font-size: 1rem; margin: 0.5rem; padding: 0.5rem 1rem; }
+    .result { font-size: 1.5rem; margin: 0.5rem 0; }
+    canvas { max-width: 100%; height: 300px !important; }
+    button { font-size: 1rem; margin: 0.3rem; padding: 0.5rem 1rem; }
+    #providers div { font-size: 0.9rem; width: 150px; }
     @media (max-width: 600px) {
-      .result { font-size: 1.3rem; }
+      .result { font-size: 1.2rem; }
       button { width: 90%; margin-top: 1rem; }
     }
   </style>
@@ -20,6 +21,8 @@
 <body onload="switchTab('top')">
   <div class="header">
     <h2>📶 ISP スピードテスト（埼玉県）</h2>
+    <div id="recommend" class="result"></div>
+    <div id="groupLabel" class="result"></div>
     <div class="result">下り速度: <span id="download">--</span></div>
     <div class="result">上り速度: <span id="upload">--</span></div>
     <div class="result">Ping: <span id="ping">--</span></div>
@@ -27,9 +30,10 @@
   <div>
     <button onclick="switchTab('top')">📈 上位5社</button>
     <button onclick="switchTab('bottom')">📉 下位5社</button>
-    <button onclick="runSpeedTest()">速度を測る</button>
+    <button id="testBtn" onclick="runSpeedTest()">速度を測る</button>
   </div>
-  <canvas id="speedChart" height="300"></canvas>
+  <canvas id="speedChart"></canvas>
+  <div id="providers"></div>
   <script src="app.js"></script>
 </body>
 </html>

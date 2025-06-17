@@ -17,7 +17,6 @@ app.get('/api/speed', async (req, res) => {
       ping: result.ping.latency
     });
   } catch (err) {
-    console.error("Speedtest error:", err);
     res.status(500).json({ error: "Speedtest failed", details: err.message });
   }
 });
