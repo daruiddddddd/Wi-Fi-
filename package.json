@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "speedtest-net": "^2.2.3"
+    "speedtest-net": "^2.1.0"
   }
 }
