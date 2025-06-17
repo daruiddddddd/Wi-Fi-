@@ -10,14 +10,15 @@ app.use(express.static(path.join(__dirname)));
 
 app.get('/api/speed', async (req, res) => {
   try {
-    const result = await speedTest({ acceptLicense: true, acceptGdpr: true });
+    const result = await speedTest({ acceptLicense: true, acceptGdpr: true, signal: AbortSignal.timeout(20000) });
     res.json({
-      download: (result.download.bandwidth * 8 / 1e6).toFixed(2), // Mbps
-      upload: (result.upload.bandwidth * 8 / 1e6).toFixed(2),     // Mbps
+      download: (result.download.bandwidth * 8 / 1e6).toFixed(2),
+      upload: (result.upload.bandwidth * 8 / 1e6).toFixed(2),
       ping: result.ping.latency
     });
   } catch (err) {
-    res.status(500).json({ error: 'Speed test failed', details: err.message });
+    console.error("Speedtest error:", err);
+    res.status(500).json({ error: "Speedtest failed", details: err.message });
   }
 });
 
