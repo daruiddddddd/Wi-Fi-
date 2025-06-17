@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP Speed Checker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 1em; }
+        canvas { max-width: 100%; height: auto; }
+        button { margin: 5px; padding: 8px 16px; }
+    </style>
+</head>
+<body>
+    <h1>インターネット速度比較（埼玉県）</h1>
+    <div>
+        <button onclick="switchTab('top')">上位5社</button>
+        <button onclick="switchTab('bottom')">下位5社</button>
+        <button onclick="startTest()">速度を測る</button>
+    </div>
+    <canvas id="speedChart" width="600" height="300"></canvas>
+    <p id="result"></p>
+    <script src="app.js"></script>
+</body>
+</html>
