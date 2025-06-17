@@ -1,26 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISP Speed Checker</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: sans-serif; padding: 1em; }
-        canvas { max-width: 100%; height: auto; }
-        button { margin: 5px; padding: 8px 16px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>埼玉県 ISPスピードテスト</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; text-align: center; }
+    .header { background: #f0f0f0; padding: 1rem; position: sticky; top: 0; z-index: 999; }
+    .result { font-size: 1.5rem; margin: 1rem 0; }
+    button { font-size: 1.2rem; padding: 0.5rem 1rem; }
+    @media (max-width: 600px) {
+      .result { font-size: 1.3rem; }
+      button { width: 90%; margin-top: 1rem; }
+    }
+  </style>
 </head>
 <body>
-    <h1>インターネット速度比較（埼玉県）</h1>
-    <div>
-        <button onclick="switchTab('top')">上位5社</button>
-        <button onclick="switchTab('bottom')">下位5社</button>
-        <button onclick="startTest()">速度を測る</button>
-    </div>
-    <canvas id="speedChart" width="600" height="300"></canvas>
-    <p id="result"></p>
-    <script src="app.js"></script>
+  <div class="header">
+    <h2>📶 ISP スピードテスト（埼玉県）</h2>
+    <div class="result">下り速度: <span id="download">--</span></div>
+    <div class="result">上り速度: <span id="upload">--</span></div>
+    <div class="result">Ping: <span id="ping">--</span></div>
+  </div>
+  <button onclick="runSpeedTest()">速度を測る</button>
+  <script src="app.js"></script>
 </body>
 </html>

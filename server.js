@@ -1,18 +1,24 @@
 const express = require('express');
 const http = require('http');
-const WebSocket = require('ws');
+const path = require('path');
+const speedTest = require('speedtest-net');
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server, path: "/ws" });
 
-app.use(express.static('.'));
+app.use(express.static(path.join(__dirname)));
 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function () {
-    const dummyData = 'x'.repeat(1024 * 100); // 100KB
-    ws.send(dummyData);
-  });
+app.get('/api/speed', async (req, res) => {
+  try {
+    const result = await speedTest({ acceptLicense: true, acceptGdpr: true });
+    res.json({
+      download: (result.download.bandwidth * 8 / 1e6).toFixed(2), // Mbps
+      upload: (result.upload.bandwidth * 8 / 1e6).toFixed(2),     // Mbps
+      ping: result.ping.latency
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Speed test failed', details: err.message });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
